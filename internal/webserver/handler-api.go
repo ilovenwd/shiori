@@ -298,7 +298,7 @@ func (h *handler) apiInsertBookmark(w http.ResponseWriter, r *http.Request, ps h
 		// If this is HTML, parse for readable content
 		contentType := resp.Header.Get("Content-Type")
 		if strings.Contains(contentType, "text/html") {
-			isReadable := readability.IsReadable(readabilityCheckInput)
+			// isReadable := readability.IsReadable(readabilityCheckInput)
 
 			article, err := readability.FromReader(readabilityInput, book.URL)
 			if err != nil {
@@ -327,9 +327,9 @@ func (h *handler) apiInsertBookmark(w http.ResponseWriter, r *http.Request, ps h
 				imageURLs = append(imageURLs, article.Favicon)
 			}
 
-			if !isReadable {
-				book.Content = ""
-			}
+			// if !isReadable {
+			//	book.Content = ""
+			// }
 
 			book.HasContent = book.Content != ""
 		}
@@ -568,7 +568,7 @@ func (h *handler) apiUpdateCache(w http.ResponseWriter, r *http.Request, ps http
 			contentType := resp.Header.Get("Content-Type")
 
 			if strings.Contains(contentType, "text/html") {
-				isReadable := readability.IsReadable(readabilityCheckInput)
+				// isReadable := readability.IsReadable(readabilityCheckInput)
 
 				article, err := readability.FromReader(readabilityInput, book.URL)
 				if err != nil {
@@ -580,9 +580,9 @@ func (h *handler) apiUpdateCache(w http.ResponseWriter, r *http.Request, ps http
 				book.Content = article.TextContent
 				book.HTML = article.Content
 
-				if !isReadable {
-					book.Content = ""
-				}
+				// if !isReadable {
+				// 	book.Content = ""
+				// }
 
 				if !keepMetadata {
 					book.Title = article.Title
